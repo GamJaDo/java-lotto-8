@@ -49,6 +49,8 @@ public class Application {
                 winningDetails[rank.ordinal()] += 1;
             }
         }
+
+        printWinningHistory(winningDetails);
     }
 
     private static int matchCount(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
@@ -64,7 +66,7 @@ public class Application {
 
     private static WinningDetails decisionRank(int numberMatchCount, boolean bonusNumberExists) {
         if (numberMatchCount == 6) {
-            return WinningDetails.FIFTH;
+            return WinningDetails.FIRST;
         }
         if (numberMatchCount == 5 && bonusNumberExists) {
             return WinningDetails.SECOND;
@@ -80,5 +82,15 @@ public class Application {
         }
 
         return null;
+    }
+
+    private static void printWinningHistory(int[] winningDetails) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---");
+        System.out.println("3개 일치 (5,000원) - " + winningDetails[WinningDetails.FIFTH.ordinal()] + "개");
+        System.out.println("4개 일치 (50,000원) - " + winningDetails[WinningDetails.FOURTH.ordinal()] + "개");
+        System.out.println("5개 일치 (1,500,000원) - " + winningDetails[WinningDetails.THIRD.ordinal()] + "개");
+        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + winningDetails[WinningDetails.SECOND.ordinal()] + "개");
+        System.out.println("6개 일치 (2,000,000,000원) - " + winningDetails[WinningDetails.FIRST.ordinal()] + "개");
     }
 }
