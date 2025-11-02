@@ -43,6 +43,11 @@ public class Application {
         for (Lotto lotto : lottos) {
             int numberMatchCount = matchCount(lotto.getNumbers(), winningNumbers.getWinningNumbers());
             boolean bonusNumberExists = lotto.getNumbers().contains(bonusNumber.getBonusNumber());
+
+            WinningDetails rank = decisionRank(numberMatchCount, bonusNumberExists);
+            if (rank != null) {
+                winningDetails[rank.ordinal()] += 1;
+            }
         }
     }
 
@@ -55,5 +60,25 @@ public class Application {
         }
 
         return count;
+    }
+
+    private static WinningDetails decisionRank(int numberMatchCount, boolean bonusNumberExists) {
+        if (numberMatchCount == 6) {
+            return WinningDetails.FIFTH;
+        }
+        if (numberMatchCount == 5 && bonusNumberExists) {
+            return WinningDetails.SECOND;
+        }
+        if (numberMatchCount == 5) {
+            return WinningDetails.THIRD;
+        }
+        if (numberMatchCount == 4) {
+            return WinningDetails.FOURTH;
+        }
+        if (numberMatchCount == 3) {
+            return WinningDetails.FIFTH;
+        }
+
+        return null;
     }
 }
