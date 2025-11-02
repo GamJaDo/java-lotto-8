@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,5 +25,9 @@ public class Lotto {
             .collect(Collectors.joining(", "));
 
         System.out.println("[" + joinNumber + "]");
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

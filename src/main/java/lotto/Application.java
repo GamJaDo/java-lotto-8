@@ -38,6 +38,22 @@ public class Application {
         System.out.println("\n보너스 번호를 입력해 주세요.");
         int inputBonusNumber = Integer.parseInt(Console.readLine());
         BonusNumber bonusNumber = new BonusNumber(inputBonusNumber);
+
+        int[] winningDetails = new int[WinningDetails.values().length];
+        for (Lotto lotto : lottos) {
+            int numberMatchCount = matchCount(lotto.getNumbers(), winningNumbers.getWinningNumbers());
+            boolean bonusNumberExists = lotto.getNumbers().contains(bonusNumber.getBonusNumber());
+        }
     }
 
+    private static int matchCount(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
+        int count = 0;
+        for (int lottoNumber : lottoNumbers) {
+            if (winningNumbers.contains(lottoNumber)) {
+                count += 1;
+            }
+        }
+
+        return count;
+    }
 }
