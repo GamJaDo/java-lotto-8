@@ -9,10 +9,17 @@ public class LottoPurchaseAmount {
     }
 
     private int validate(String readLottoPurchaseAmount) {
+        validateBlank(readLottoPurchaseAmount);
         validateDigits(readLottoPurchaseAmount);
         int lottoPurchaseAmount = Integer.parseInt(readLottoPurchaseAmount);
         validateUnit(lottoPurchaseAmount);
         return lottoPurchaseAmount;
+    }
+
+    private void validateBlank(String readLottoPurchaseAmount) {
+        if (readLottoPurchaseAmount.isBlank()) {
+            throw new IllegalArgumentException("[ERROR] 구입 금액을 입력해야 합니다.");
+        }
     }
 
     private void validateDigits(String readLottoPurchaseAmount) {
