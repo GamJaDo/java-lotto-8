@@ -5,6 +5,10 @@ import java.util.List;
 
 public class WinningNumbers {
 
+    public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int RANDOM_NUMBER_MINIMUM_VALUE = 1;
+    public static final int RANDOM_NUMBER_MAXIMUM_VALUE = 45;
+
     private final List<Integer> winningNumbers;
 
     public WinningNumbers(String readWinningNumbers) {
@@ -34,14 +38,14 @@ public class WinningNumbers {
     }
 
     private void validateNumberCount(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != 6) {
+        if (winningNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다.");
         }
     }
 
     private void validateNumberRange(List<Integer> winningNumbers) {
         for (Integer winningNumber : winningNumbers) {
-            if (winningNumber < 1 || winningNumber > 45) {
+            if (winningNumber < RANDOM_NUMBER_MINIMUM_VALUE || winningNumber > RANDOM_NUMBER_MAXIMUM_VALUE) {
                 throw new IllegalArgumentException("[ERROR] 당첨 번호는 1부터 45 사이여야 합니다.");
             }
         }

@@ -2,6 +2,9 @@ package lotto.domain;
 
 public class BonusNumber {
 
+    public static final int RANDOM_NUMBER_MINIMUM_VALUE = 1;
+    public static final int RANDOM_NUMBER_MAXIMUM_VALUE = 45;
+
     private final int bonusNumber;
 
     public BonusNumber(String readBonusNumber) {
@@ -29,7 +32,7 @@ public class BonusNumber {
     }
 
     private void validateNumberRange(int bonusNumber) {
-        if (bonusNumber < 1 || bonusNumber > 45) {
+        if (bonusNumber < RANDOM_NUMBER_MINIMUM_VALUE || bonusNumber > RANDOM_NUMBER_MAXIMUM_VALUE) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 1부터 45 사이여야 합니다.");
         }
     }

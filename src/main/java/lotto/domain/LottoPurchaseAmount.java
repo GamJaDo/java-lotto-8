@@ -2,6 +2,8 @@ package lotto.domain;
 
 public class LottoPurchaseAmount {
 
+    public static final int LOTTO_PRICE = 1000;
+
     private final int lottoPurchaseAmount;
 
     public LottoPurchaseAmount(String readLottoPurchaseAmount) {
@@ -29,7 +31,7 @@ public class LottoPurchaseAmount {
     }
 
     private void validateUnit(int lottoPurchaseAmount) {
-        if (lottoPurchaseAmount % 1000 != 0) {
+        if (lottoPurchaseAmount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다.");
         }
     }

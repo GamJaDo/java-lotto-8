@@ -12,13 +12,15 @@ import lotto.view.LottoOutputView;
 
 public class LottoController {
 
+    public static final int LOTTO_PRICE = 1000;
+
     private final LottoInputView lottoInputView = new LottoInputView();
     private final LottoOutputView lottoOutputView = new LottoOutputView();
     private final LottoService lottoService = new LottoService();
 
     public void run() {
         LottoPurchaseAmount lottoPurchaseAmount = inputPurchaseAmountTry();
-        int lottoPurchaseCount = lottoPurchaseAmount.getLottoPurchaseAmount() / 1000;
+        int lottoPurchaseCount = lottoPurchaseAmount.getLottoPurchaseAmount() / LOTTO_PRICE;
         lottoOutputView.printLottoPurchaseCount(lottoPurchaseCount);
 
         List<Lotto> lottos = lottoService.generateLotto(lottoPurchaseCount);
