@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,34 +7,22 @@ public class WinningNumbers {
 
     private final List<Integer> winningNumbers;
 
-    public WinningNumbers(String inputWinningNumbers) {
-        validateHasComma(inputWinningNumbers);
-        List<Integer> winningNumbers = Arrays.stream(inputWinningNumbers.split(","))
-            .map(Integer::parseInt)
-            .toList();
-        validate(winningNumbers);
+    public WinningNumbers(String readWinningNumbers) {
+        this.winningNumbers = validate(readWinningNumbers);
+    }
 
-        this.winningNumbers = winningNumbers;
+    private List<Integer> validate(String readWinningNumbers) {
+        validateHasComma(readWinningNumbers);
+        List<Integer> winningNumbers = convertIntegerList(readWinningNumbers);
+        validateNumberCount(winningNumbers);
+        validateNumberRange(winningNumbers);
+        validateNoDuplicate(winningNumbers);
+        return winningNumbers;
     }
 
     private void validateHasComma(String inputWinningNumbers) {
         if (!inputWinningNumbers.contains(",")) {
             throw new IllegalArgumentException("[ERROR] 구분자 쉼표(,)가 없습니다.");
-        }
-    }
-
-    private void validate(List<Integer> winningNumbers) {
-        validateNumberComposition(winningNumbers);
-        validateNumberCount(winningNumbers);
-        validateNumberRange(winningNumbers);
-        validateNoDuplicate(winningNumbers);
-    }
-
-    private void validateNumberComposition(List<Integer> winningNumbers) {
-        for (Integer winningNumber : winningNumbers) {
-            if (!String.valueOf(winningNumber).matches("\\d+")) {
-                throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자로 입력해야 합니다.");
-            }
         }
     }
 
@@ -45,7 +33,7 @@ public class WinningNumbers {
     }
 
     private void validateNumberRange(List<Integer> winningNumbers) {
-        for (Integer winningNumber: winningNumbers) {
+        for (Integer winningNumber : winningNumbers) {
             if (winningNumber < 1 || winningNumber > 45) {
                 throw new IllegalArgumentException("[ERROR] 당첨 번호는 1부터 45 사이여야 합니다.");
             }
@@ -55,6 +43,16 @@ public class WinningNumbers {
     private void validateNoDuplicate(List<Integer> winningNumbers) {
         if (winningNumbers.size() != winningNumbers.stream().distinct().count()) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호들 중 중복된 번호가 있습니다.");
+        }
+    }
+
+    private List<Integer> convertIntegerList(String readWinningNumbers) {
+        try {
+            return Arrays.stream(readWinningNumbers.split(","))
+                .map(Integer::parseInt)
+                .toList();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자로 입력해야 합니다.");
         }
     }
 

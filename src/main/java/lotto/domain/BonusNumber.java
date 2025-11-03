@@ -1,21 +1,22 @@
-package lotto;
+package lotto.domain;
 
 public class BonusNumber {
 
     private final int bonusNumber;
 
-    public BonusNumber(int bonusNumber) {
-        validate(bonusNumber);
-        this.bonusNumber = bonusNumber;
+    public BonusNumber(String readBonusNumber) {
+        this.bonusNumber = validate(readBonusNumber);
     }
 
-    private void validate(int bonusNumber) {
-        validateNumberComposition(bonusNumber);
+    private int validate(String readBonusNumber) {
+        validateNumberComposition(readBonusNumber);
+        int bonusNumber = Integer.parseInt(readBonusNumber);
         validateNumberRange(bonusNumber);
+        return bonusNumber;
     }
 
-    private void validateNumberComposition(int bonusNumber) {
-        if (!String.valueOf(bonusNumber).matches("\\d+")) {
+    private void validateNumberComposition(String readBonusNumber) {
+        if (!readBonusNumber.matches("\\d+")) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.");
         }
     }
