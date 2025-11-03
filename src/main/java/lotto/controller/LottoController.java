@@ -17,7 +17,7 @@ public class LottoController {
     private final LottoService lottoService = new LottoService();
 
     public void run() {
-        LottoPurchaseAmount lottoPurchaseAmount = lottoInputView.inputPurchaseAmount();
+        LottoPurchaseAmount lottoPurchaseAmount = inputPurchaseAmountTry();
         int lottoPurchaseCount = lottoPurchaseAmount.getLottoPurchaseAmount() / 1000;
         lottoOutputView.printLottoPurchaseCount(lottoPurchaseCount);
 
@@ -32,8 +32,38 @@ public class LottoController {
     }
 
     private WinningSet inputWinningSet() {
-        WinningNumbers winningNumbers = lottoInputView.inputWinningNumbers();
-        BonusNumber bonusNumber = lottoInputView.inputBonusNumber();
+        WinningNumbers winningNumbers = inputWinningNumbersTry();
+        BonusNumber bonusNumber = inputBonusNumberTry();
         return new WinningSet(winningNumbers, bonusNumber);
+    }
+
+    private LottoPurchaseAmount inputPurchaseAmountTry() {
+        while (true) {
+            try {
+                return lottoInputView.inputPurchaseAmount();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private WinningNumbers inputWinningNumbersTry() {
+        while (true) {
+            try {
+                return lottoInputView.inputWinningNumbers();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private BonusNumber inputBonusNumberTry() {
+        while (true) {
+            try {
+                return lottoInputView.inputBonusNumber();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

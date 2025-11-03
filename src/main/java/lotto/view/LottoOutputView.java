@@ -24,17 +24,23 @@ public class LottoOutputView {
     public void printWinningHistory(List<Integer> winningDetailsCounts) {
         System.out.println("\n당첨 통계");
         System.out.println("---");
-        printWinningDetail("3개 일치", WinningDetails.FIFTH, winningDetailsCounts);
-        printWinningDetail("4개 일치", WinningDetails.FOURTH, winningDetailsCounts);
-        printWinningDetail("5개 일치", WinningDetails.THIRD, winningDetailsCounts);
-        printWinningDetail("5개 일치, 보너스 볼 일치", WinningDetails.SECOND, winningDetailsCounts);
-        printWinningDetail("6개 일치", WinningDetails.FIRST, winningDetailsCounts);
+        printWinningDetails(WinningDetails.FIFTH.getDescription(), WinningDetails.FIFTH,
+            winningDetailsCounts);
+        printWinningDetails(WinningDetails.FOURTH.getDescription(), WinningDetails.FOURTH,
+            winningDetailsCounts);
+        printWinningDetails(WinningDetails.THIRD.getDescription(), WinningDetails.THIRD,
+            winningDetailsCounts);
+        printWinningDetails(WinningDetails.SECOND.getDescription(), WinningDetails.SECOND,
+            winningDetailsCounts);
+        printWinningDetails(WinningDetails.FIRST.getDescription(), WinningDetails.FIRST,
+            winningDetailsCounts);
     }
 
-    private void printWinningDetail(String label, WinningDetails winningDetails, List<Integer> winningDetailsCounts) {
+    private void printWinningDetails(String description, WinningDetails winningDetails,
+        List<Integer> winningDetailsCounts) {
         String prizeMoney = numberFormat.format(winningDetails.getPrizeMoney());
         int count = winningDetailsCounts.get(winningDetails.getIndex());
-        System.out.println(label + " (" + prizeMoney + "원) - " + count + "개");
+        System.out.println(description + " (" + prizeMoney + "원) - " + count + "개");
     }
 
     public void printRateOfReturn(List<Integer> winningDetailsCounts,
