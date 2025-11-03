@@ -12,8 +12,8 @@ public class WinningNumbers {
     }
 
     private List<Integer> validate(String readWinningNumbers) {
-        validateHasComma(readWinningNumbers);
         validateBlank(readWinningNumbers);
+        validateHasComma(readWinningNumbers);
         List<Integer> winningNumbers = convertIntegerList(readWinningNumbers);
         validateNumberCount(winningNumbers);
         validateNumberRange(winningNumbers);
@@ -21,15 +21,15 @@ public class WinningNumbers {
         return winningNumbers;
     }
 
-    private void validateHasComma(String inputWinningNumbers) {
-        if (!inputWinningNumbers.contains(",")) {
-            throw new IllegalArgumentException("[ERROR] 구분자 쉼표(,)가 없습니다.");
+    private void validateBlank(String readLottoPurchaseAmount) {
+        if (readLottoPurchaseAmount.isBlank()) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호를 입력해야 합니다.");
         }
     }
 
-    private void validateBlank(String readLottoPurchaseAmount) {
-        if (readLottoPurchaseAmount.isBlank()) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호을 입력해야 합니다.");
+    private void validateHasComma(String inputWinningNumbers) {
+        if (!inputWinningNumbers.contains(",")) {
+            throw new IllegalArgumentException("[ERROR] 구분자 쉼표(,)가 없습니다.");
         }
     }
 

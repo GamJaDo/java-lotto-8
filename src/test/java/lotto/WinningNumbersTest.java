@@ -14,6 +14,13 @@ public class WinningNumbersTest {
     }
 
     @Test
+    void 당첨_번호를_입력하지_않은_경우_예외_발생() {
+        assertThatThrownBy(() -> new WinningNumbers(""))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("[ERROR] 당첨 번호를 입력해야 합니다.");
+    }
+
+    @Test
     void 당첨_번호를_구분자_쉼표가_없을시_예외_발생() {
         assertThatThrownBy(() -> new WinningNumbers("1/2/3/4/5/6"))
             .isInstanceOf(IllegalArgumentException.class)
@@ -28,21 +35,21 @@ public class WinningNumbersTest {
     }
 
     @Test
-    void 당첨_번호_입력시_범위를_벗어나는_숫자를_입력할_경우_예외를_발생() {
+    void 당첨_번호_입력시_범위를_벗어나는_숫자를_입력할_경우_예외_발생() {
         assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,46"))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 당첨 번호는 1부터 45 사이여야 합니다.");
     }
 
     @Test
-    void 당첨_번호_입력시_중복되는_숫자를_입력할_경우_예외를_발생() {
+    void 당첨_번호_입력시_중복되는_숫자를_입력할_경우_예외_발생() {
         assertThatThrownBy(() -> new WinningNumbers("1,1,2,3,4,5"))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 당첨 번호들 중 중복된 번호가 있습니다.");
     }
 
     @Test
-    void 당첨_번호를_숫자로_입력하지_않은_경우_예외를_발생() {
+    void 당첨_번호를_숫자로_입력하지_않은_경우_예외_발생() {
         assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,r"))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 당첨 번호는 숫자로 입력해야 합니다.");

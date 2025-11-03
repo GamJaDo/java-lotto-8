@@ -9,22 +9,22 @@ public class BonusNumber {
     }
 
     private int validate(String readBonusNumber) {
-        validateNumberComposition(readBonusNumber);
         validateBlank(readBonusNumber);
+        validateNumberComposition(readBonusNumber);
         int bonusNumber = Integer.parseInt(readBonusNumber);
         validateNumberRange(bonusNumber);
         return bonusNumber;
     }
 
-    private void validateNumberComposition(String readBonusNumber) {
-        if (!readBonusNumber.matches("\\d+")) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.");
+    private void validateBlank(String readLottoPurchaseAmount) {
+        if (readLottoPurchaseAmount.isBlank()) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호를 입력해야 합니다.");
         }
     }
 
-    private void validateBlank(String readLottoPurchaseAmount) {
-        if (readLottoPurchaseAmount.isBlank()) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호을 입력해야 합니다.");
+    private void validateNumberComposition(String readBonusNumber) {
+        if (!readBonusNumber.matches("\\d+")) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.");
         }
     }
 
